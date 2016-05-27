@@ -14,6 +14,8 @@
 		F424F1D71CE9DBEE00A7FA66 /* AuthenticationParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = F424F1D61CE9DBEE00A7FA66 /* AuthenticationParams.swift */; };
 		F43C934C1CEC901A00CFE2DC /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43C934B1CEC901A00CFE2DC /* PlayerViewController.swift */; };
 		F43C934E1CEF2ABE00CFE2DC /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43C934D1CEF2ABE00CFE2DC /* MainWindowController.swift */; };
+		F4EC44E61CF19A480045A5E1 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EC44E51CF19A480045A5E1 /* SwiftyJSON.swift */; };
+		F4EC44E91CF19DE80045A5E1 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EC44E81CF19DE80045A5E1 /* Audio.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		F424F1D61CE9DBEE00A7FA66 /* AuthenticationParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationParams.swift; sourceTree = "<group>"; };
 		F43C934B1CEC901A00CFE2DC /* PlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		F43C934D1CEF2ABE00CFE2DC /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
+		F4EC44E51CF19A480045A5E1 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		F4EC44E81CF19DE80045A5E1 /* Audio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +63,7 @@
 			isa = PBXGroup;
 			children = (
 				F424F1D51CE9DBC900A7FA66 /* Not versioned */,
+				F4EC44E71CF19DC50045A5E1 /* VK types */,
 				F424F1C41CE9C1E900A7FA66 /* AppDelegate.swift */,
 				F43C934B1CEC901A00CFE2DC /* PlayerViewController.swift */,
 				F424F1C61CE9C1E900A7FA66 /* LoginViewController.swift */,
@@ -66,6 +71,7 @@
 				F424F1C81CE9C1E900A7FA66 /* Assets.xcassets */,
 				F424F1CA1CE9C1E900A7FA66 /* Main.storyboard */,
 				F424F1CD1CE9C1E900A7FA66 /* Info.plist */,
+				F4EC44E51CF19A480045A5E1 /* SwiftyJSON.swift */,
 			);
 			path = WebKitTest;
 			sourceTree = "<group>";
@@ -76,6 +82,14 @@
 				F424F1D61CE9DBEE00A7FA66 /* AuthenticationParams.swift */,
 			);
 			name = "Not versioned";
+			sourceTree = "<group>";
+		};
+		F4EC44E71CF19DC50045A5E1 /* VK types */ = {
+			isa = PBXGroup;
+			children = (
+				F4EC44E81CF19DE80045A5E1 /* Audio.swift */,
+			);
+			name = "VK types";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,8 +165,10 @@
 				F424F1C71CE9C1E900A7FA66 /* LoginViewController.swift in Sources */,
 				F43C934C1CEC901A00CFE2DC /* PlayerViewController.swift in Sources */,
 				F424F1D71CE9DBEE00A7FA66 /* AuthenticationParams.swift in Sources */,
+				F4EC44E61CF19A480045A5E1 /* SwiftyJSON.swift in Sources */,
 				F424F1C51CE9C1E900A7FA66 /* AppDelegate.swift in Sources */,
 				F43C934E1CEF2ABE00CFE2DC /* MainWindowController.swift in Sources */,
+				F4EC44E91CF19DE80045A5E1 /* Audio.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
