@@ -11,7 +11,7 @@ import WebKit
 
 protocol LoginProtocol {
     func loginSucceeded(token: String, expiresIn: String, userID: String)
-    func loginFailed()
+    func loginFailed(url: String)
 }
 
 class LoginViewController: NSViewController, WebFrameLoadDelegate {
@@ -46,8 +46,7 @@ class LoginViewController: NSViewController, WebFrameLoadDelegate {
     }
     
     private func handleError(url: String) {
-        NSLog("Error logging in: \(url)")
-        delegate?.loginFailed()
+        delegate?.loginFailed(url)
     }
     
     private func handleLogin(url: String) {

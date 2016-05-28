@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import AVFoundation
 
 class PlayerViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, LoginProtocol {
     var token = ""
@@ -14,6 +15,7 @@ class PlayerViewController: NSViewController, NSTableViewDelegate, NSTableViewDa
     var userId = ""
     
     var audios = [Audio]()
+    let player = AVPlayer()
 
     @IBOutlet weak var loadingIndicator: NSProgressIndicator!
     @IBOutlet weak var songTable: NSTableView!
@@ -62,7 +64,7 @@ class PlayerViewController: NSViewController, NSTableViewDelegate, NSTableViewDa
             cellID = "titleCellID"
         } else if tableColumn == tableView.tableColumns[3] {
             // Duration
-            text = audio.duration
+            text = audio.durationString
             cellID = "durationCellID"
         } else {
             return nil
@@ -77,6 +79,63 @@ class PlayerViewController: NSViewController, NSTableViewDelegate, NSTableViewDa
         return nil
     }
     
+    func tableViewSelectionDidChange(notification: NSNotification) {
+        // Don't care about removing selection.
+        if songTable.numberOfSelectedRows > 0 {
+            let selectedAudio = audios[songTable.selectedRow]
+            play(selectedAudio)
+        }
+    }
+    
+    private func play(audio: Audio) {
+        let url = audio.url
+        
+        let fileManager = NSFileManager.defaultManager()
+        let cachesDir = fileManager.URLsForDirectory(.CachesDirectory, inDomains: .UserDomainMask)[0]
+        
+        let fileName = cachesDir.absoluteURL.URLByAppendingPathComponent("\(audio.id).\(url.pathExtension!)")
+        if fileManager.fileExistsAtPath(fileName.path!) {
+            playNewSong(fileName)
+        } else {
+            loadingIndicator.startAnimation(self)
+            let downloadTask = NSURLSession.sharedSession().downloadTaskWithURL(url) { (downloadedUrl, response, err) in
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.loadingIndicator.stopAnimation(self)
+                }
+                
+                guard downloadedUrl != nil && err == nil else {
+                    NSLog("Download task failed for \(url). Error: \(err)")
+                    return
+                }
+                
+                do {
+                    try fileManager.moveItemAtURL(downloadedUrl!, toURL: fileName)
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.playNewSong(fileName)
+                    }
+                } catch {
+                    NSLog("Error moving downloaded audio: \(error)")
+                }
+            }
+            
+            downloadTask.resume()
+        }
+    }
+    
+    private func playNewSong(fileName: NSURL) {
+        let asset = AVAsset(URL: fileName)
+        guard asset.playable else {
+            NSLog("Asset isn't playable! \(asset)")
+            return
+        }
+        
+        let playerItem = AVPlayerItem(asset: asset)
+        player.pause()
+        player.rate = 0
+        player.replaceCurrentItemWithPlayerItem(playerItem)
+        player.play()
+    }
+    
     func loginSucceeded(token: String, expiresIn: String, userID: String) {
         print("Login successful")
         
@@ -85,22 +144,10 @@ class PlayerViewController: NSViewController, NSTableViewDelegate, NSTableViewDa
         self.userId = userID
         
         loadMusicInfo()
-        
-        loadingIndicator.stopAnimation(self)
-        for i in 1...15 {
-            let a = AudioInfo(id: UInt(i), owner_id: i, artist: "Artist \(i)", title: "Title \(i)", duration: UInt(i), url: NSURL(string: "\(i)")!)
-            let audio = Audio(info: a)
-            audio.image = NSApp.applicationIconImage
-            audios.append(audio)
-        }
-        
-        dispatch_async(dispatch_get_main_queue()) {
-            self.songTable.reloadData()
-        }
     }
     
-    func loginFailed() {
-        
+    func loginFailed(url: String) {
+        NSLog("Error logging in: \(url)")
     }
     
     private func loadMusicInfo() {
@@ -111,10 +158,10 @@ class PlayerViewController: NSViewController, NSTableViewDelegate, NSTableViewDa
         }
         
         let request = NSMutableURLRequest(URL: endpoint)
-        NSURLSession.sharedSession().dataTaskWithRequest(request, completionHandler: requestHandler).resume()
+        NSURLSession.sharedSession().dataTaskWithRequest(request, completionHandler: musicInfoRequestHandler).resume()
     }
     
-    private func requestHandler(data: NSData?, response: NSURLResponse?, err: NSError?) {
+    private func musicInfoRequestHandler(data: NSData?, response: NSURLResponse?, err: NSError?) {
         if err != nil {
             NSLog(err!.description)
             return
@@ -130,7 +177,7 @@ class PlayerViewController: NSViewController, NSTableViewDelegate, NSTableViewDa
         var tempAudios = [Audio]()
         
         let json = JSON(data: data!)
-        print(json)
+        //print(json)
         
         guard let audioInfoItems = json["response"]["items"].array else {
             NSLog("Received JSON doesn't have audio items: \(json)")
@@ -171,9 +218,7 @@ class PlayerViewController: NSViewController, NSTableViewDelegate, NSTableViewDa
             let lyricsID = item["lyrics_id"].uInt
             let albumID = item["album_id"].uInt
             
-            let audioInfo = AudioInfo(id: audioID, owner_id: ownerID, artist: artist, title: title, duration: duration, url: url, lyrics_id: lyricsID, album_id: albumID)
-            
-            tempAudios.append(Audio(info: audioInfo))
+            tempAudios.append(Audio(id: audioID, owner_id: ownerID, artist: artist, title: title, duration: duration, url: url, lyrics_id: lyricsID, album_id: albumID))
         }
         
         dispatch_async(dispatch_get_main_queue()) {
