@@ -19,7 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F424F1C11CE9C1E900A7FA66 /* WebKitTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebKitTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F424F1C11CE9C1E900A7FA66 /* VKPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F424F1C41CE9C1E900A7FA66 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F424F1C61CE9C1E900A7FA66 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		F424F1C81CE9C1E900A7FA66 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -46,7 +46,7 @@
 		F424F1B81CE9C1E800A7FA66 = {
 			isa = PBXGroup;
 			children = (
-				F424F1C31CE9C1E900A7FA66 /* WebKitTest */,
+				F424F1C31CE9C1E900A7FA66 /* VKPlayer */,
 				F424F1C21CE9C1E900A7FA66 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,12 +54,12 @@
 		F424F1C21CE9C1E900A7FA66 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F424F1C11CE9C1E900A7FA66 /* WebKitTest.app */,
+				F424F1C11CE9C1E900A7FA66 /* VKPlayer.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F424F1C31CE9C1E900A7FA66 /* WebKitTest */ = {
+		F424F1C31CE9C1E900A7FA66 /* VKPlayer */ = {
 			isa = PBXGroup;
 			children = (
 				F424F1D51CE9DBC900A7FA66 /* Not versioned */,
@@ -73,7 +73,7 @@
 				F424F1CD1CE9C1E900A7FA66 /* Info.plist */,
 				F4EC44E51CF19A480045A5E1 /* SwiftyJSON.swift */,
 			);
-			path = WebKitTest;
+			path = VKPlayer;
 			sourceTree = "<group>";
 		};
 		F424F1D51CE9DBC900A7FA66 /* Not versioned */ = {
@@ -95,9 +95,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F424F1C01CE9C1E800A7FA66 /* WebKitTest */ = {
+		F424F1C01CE9C1E800A7FA66 /* VKPlayer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F424F1D01CE9C1E900A7FA66 /* Build configuration list for PBXNativeTarget "WebKitTest" */;
+			buildConfigurationList = F424F1D01CE9C1E900A7FA66 /* Build configuration list for PBXNativeTarget "VKPlayer" */;
 			buildPhases = (
 				F424F1BD1CE9C1E800A7FA66 /* Sources */,
 				F424F1BE1CE9C1E800A7FA66 /* Frameworks */,
@@ -107,9 +107,9 @@
 			);
 			dependencies = (
 			);
-			name = WebKitTest;
-			productName = WebKitTest;
-			productReference = F424F1C11CE9C1E900A7FA66 /* WebKitTest.app */;
+			name = VKPlayer;
+			productName = VKPlayer;
+			productReference = F424F1C11CE9C1E900A7FA66 /* VKPlayer.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -127,7 +127,7 @@
 					};
 				};
 			};
-			buildConfigurationList = F424F1BC1CE9C1E800A7FA66 /* Build configuration list for PBXProject "WebKitTest" */;
+			buildConfigurationList = F424F1BC1CE9C1E800A7FA66 /* Build configuration list for PBXProject "VKPlayer" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -140,7 +140,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F424F1C01CE9C1E800A7FA66 /* WebKitTest */,
+				F424F1C01CE9C1E800A7FA66 /* VKPlayer */,
 			);
 		};
 /* End PBXProject section */
@@ -273,9 +273,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = WebKitTest/Info.plist;
+				INFOPLIST_FILE = VKPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.pd.WebKitTest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pd.VKPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -285,9 +285,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = WebKitTest/Info.plist;
+				INFOPLIST_FILE = VKPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.pd.WebKitTest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pd.VKPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -295,7 +295,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F424F1BC1CE9C1E800A7FA66 /* Build configuration list for PBXProject "WebKitTest" */ = {
+		F424F1BC1CE9C1E800A7FA66 /* Build configuration list for PBXProject "VKPlayer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F424F1CE1CE9C1E900A7FA66 /* Debug */,
@@ -304,7 +304,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F424F1D01CE9C1E900A7FA66 /* Build configuration list for PBXNativeTarget "WebKitTest" */ = {
+		F424F1D01CE9C1E900A7FA66 /* Build configuration list for PBXNativeTarget "VKPlayer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F424F1D11CE9C1E900A7FA66 /* Debug */,

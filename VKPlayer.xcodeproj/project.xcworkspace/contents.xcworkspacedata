@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:WebKitTest.xcodeproj">
+      location = "self:VKPlayer.xcodeproj">
    </FileRef>
 </Workspace>

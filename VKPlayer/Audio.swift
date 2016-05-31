@@ -1,6 +1,6 @@
 //
 //  Audio.swift
-//  WebKitTest
+//  VKPlayer
 //
 //  Created by Pavlo Denysiuk on 5/22/16.
 //  Copyright © 2016 Pavlo Denysiuk. All rights reserved.
@@ -36,5 +36,7 @@ class Audio {
         self.url = url
         self.lyrics_id = lyrics_id
         self.album_id = album_id
+        
+        image = NSApplication.sharedApplication().applicationIconImage
     }
 }

@@ -1,6 +1,6 @@
 //
 //  MainWindowController.swift
-//  WebKitTest
+//  VKPlayer
 //
 //  Created by Pavlo Denysiuk on 5/20/16.
 //  Copyright © 2016 Pavlo Denysiuk. All rights reserved.

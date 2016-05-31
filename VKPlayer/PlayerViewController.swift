@@ -1,6 +1,6 @@
 //
 //  PlayerViewController.swift
-//  WebKitTest
+//  VKPlayer
 //
 //  Created by Pavlo Denysiuk on 5/18/16.
 //  Copyright © 2016 Pavlo Denysiuk. All rights reserved.
@@ -38,6 +38,22 @@ class PlayerViewController: NSViewController, NSTableViewDelegate, NSTableViewDa
             if let dest = segue.destinationController as? LoginViewController {
                 dest.delegate = self
             }
+        }
+    }
+    
+    
+    @IBAction func onStopPlay(sender: NSSegmentedControl) {
+        switch sender.selectedSegment {
+        case 0:
+            // Stop
+            player.pause()
+            
+        case 1:
+            // Play
+            player.play()
+            
+        default:
+            NSLog("Unknown control clicked on PlayStop!")
         }
     }
     
@@ -95,8 +111,12 @@ class PlayerViewController: NSViewController, NSTableViewDelegate, NSTableViewDa
         let fileManager = NSFileManager.defaultManager()
         let cachesDir = fileManager.URLsForDirectory(.CachesDirectory, inDomains: .UserDomainMask)[0]
         
-        let fileName = cachesDir.absoluteURL.URLByAppendingPathComponent("\(audio.id).\(url.pathExtension!)")
+        let bundleID = NSBundle.mainBundle().bundleIdentifier ?? "VKPlayer"
+        
+        // ~/Library/Caches/<bundle_id>/song.ext
+        let fileName = cachesDir.absoluteURL.URLByAppendingPathComponent(bundleID).URLByAppendingPathComponent("\(audio.id).\(url.pathExtension!)")
         if fileManager.fileExistsAtPath(fileName.path!) {
+            titleBarText.stringValue = "\(audio.artist) - \(audio.title)"
             playNewSong(fileName)
         } else {
             loadingIndicator.startAnimation(self)
@@ -113,6 +133,7 @@ class PlayerViewController: NSViewController, NSTableViewDelegate, NSTableViewDa
                 do {
                     try fileManager.moveItemAtURL(downloadedUrl!, toURL: fileName)
                     dispatch_async(dispatch_get_main_queue()) {
+                        self.titleBarText.stringValue = "\(audio.artist) - \(audio.title)"
                         self.playNewSong(fileName)
                     }
                 } catch {
