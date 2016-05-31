@@ -17,6 +17,8 @@ class PlayerViewController: NSViewController, NSTableViewDelegate, NSTableViewDa
     var audios = [Audio]()
     let player = AVPlayer()
 
+    @IBOutlet weak var mediaControls: NSSegmentedControl!
+    @IBOutlet weak var titleBarText: NSTextField!
     @IBOutlet weak var loadingIndicator: NSProgressIndicator!
     @IBOutlet weak var songTable: NSTableView!
     
