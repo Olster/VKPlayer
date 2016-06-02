@@ -16,16 +16,16 @@ class PlayerViewController: NSViewController, NSTableViewDelegate, NSTableViewDa
     
     var audios = [Audio]()
     let player = AVPlayer()
-
-    @IBOutlet weak var mediaControls: NSSegmentedControl!
-    @IBOutlet weak var titleBarText: NSTextField!
+    
     @IBOutlet weak var loadingIndicator: NSProgressIndicator!
+    @IBOutlet weak var artistLabel: NSTextField!
+    @IBOutlet weak var titleLabel: NSTextField!
+    @IBOutlet weak var songProgress: NSSlider!
+    @IBOutlet weak var volumeSlider: NSSlider!
     @IBOutlet weak var songTable: NSTableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do view setup here.
-        
         loadingIndicator.startAnimation(self)
     }
     
@@ -41,7 +41,28 @@ class PlayerViewController: NSViewController, NSTableViewDelegate, NSTableViewDa
         }
     }
     
+    @IBAction func onRewind(sender: NSButton) {
+    }
     
+    @IBAction func onPlay(sender: NSButton) {
+        if player.rate == 0 { // Stopped.
+            player.play()
+        } else {
+            player.pause()
+        }
+    }
+    
+    @IBAction func onForward(sender: NSButton) {
+    }
+    
+    @IBAction func onShuffle(sender: NSButton) {
+    }
+    
+    @IBAction func onReplay(sender: NSButton) {
+    }
+    
+    
+    /*
     @IBAction func onStopPlay(sender: NSSegmentedControl) {
         switch sender.selectedSegment {
         case 0:
@@ -56,7 +77,10 @@ class PlayerViewController: NSViewController, NSTableViewDelegate, NSTableViewDa
             NSLog("Unknown control clicked on PlayStop!")
         }
     }
+     
+     */
     
+    // MARK: - Song list related (NSTableView)
     func numberOfRowsInTableView(tableView: NSTableView) -> Int {
         return audios.count
     }
@@ -64,39 +88,16 @@ class PlayerViewController: NSViewController, NSTableViewDelegate, NSTableViewDa
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let audio = audios[row]
         
-        var cellID = ""
-        var text = ""
-        var image: NSImage? = nil
-        
-        if tableColumn == tableView.tableColumns[0] {
-            // Album art
-            image = audio.image
-            cellID = "artCellID"
-        } else if tableColumn == tableView.tableColumns[1] {
-            // Artist
-            text = audio.artist
-            cellID = "artistCellID"
-        } else if tableColumn == tableView.tableColumns[2] {
-            // Title
-            text = audio.title
-            cellID = "titleCellID"
-        } else if tableColumn == tableView.tableColumns[3] {
-            // Duration
-            text = audio.durationString
-            cellID = "durationCellID"
-        } else {
-            return nil
-        }
-        
-        if let view = tableView.makeViewWithIdentifier(cellID, owner: self) as? NSTableCellView {
-            view.textField?.stringValue = text
-            view.imageView?.image = image
+        if let view = tableView.makeViewWithIdentifier("SongCellView", owner: self) as? SongCellView {
+            view.artistTitle = "\(audio.artist) - \(audio.title)"
+            view.duration = audio.duration
             return view
         }
         
         return nil
     }
     
+    /*
     func tableViewSelectionDidChange(notification: NSNotification) {
         // Don't care about removing selection.
         if songTable.numberOfSelectedRows > 0 {
@@ -158,10 +159,9 @@ class PlayerViewController: NSViewController, NSTableViewDelegate, NSTableViewDa
         player.replaceCurrentItemWithPlayerItem(playerItem)
         player.play()
     }
+ */
     
     func loginSucceeded(token: String, expiresIn: String, userID: String) {
-        print("Login successful")
-        
         self.token = token
         self.expiresIn = expiresIn
         self.userId = userID
@@ -171,6 +171,7 @@ class PlayerViewController: NSViewController, NSTableViewDelegate, NSTableViewDa
     
     func loginFailed(url: String) {
         NSLog("Error logging in: \(url)")
+        // TODO: Display an error and handle the situation.
     }
     
     private func loadMusicInfo() {
@@ -248,6 +249,9 @@ class PlayerViewController: NSViewController, NSTableViewDelegate, NSTableViewDa
             self.audios = tempAudios
             self.loadingIndicator.stopAnimation(self)
             self.songTable.reloadData()
+            
+            self.artistLabel.stringValue = self.audios[0].artist
+            self.titleLabel.stringValue = self.audios[0].title
         }
     }
 }
