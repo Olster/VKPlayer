@@ -884,6 +884,9 @@
                                     <slider toolTip="Volume" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AJs-ag-DdV" userLabel="Volume">
                                         <rect key="frame" x="194" y="26" width="128" height="21"/>
                                         <sliderCell key="cell" state="on" alignment="left" maxValue="1" doubleValue="0.75" tickMarkPosition="above" sliderType="linear" id="h2w-vD-zgJ" customClass="KnoblessSliderCell" customModule="VKPlayer" customModuleProvider="target"/>
+                                        <connections>
+                                            <binding destination="HCH-Cy-uCX" name="value" keyPath="self.player.volume" id="cH8-BT-Qbb"/>
+                                        </connections>
                                     </slider>
                                     <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="5uI-tE-PoL">
                                         <rect key="frame" x="304" y="124" width="16" height="16"/>

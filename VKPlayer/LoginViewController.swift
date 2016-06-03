@@ -9,7 +9,7 @@
 import Cocoa
 import WebKit
 
-protocol LoginProtocol {
+protocol LoginDelegate {
     func loginSucceeded(token: String, expiresIn: String, userID: String)
     func loginFailed(url: String)
 }
@@ -17,7 +17,7 @@ protocol LoginProtocol {
 class LoginViewController: NSViewController, WebFrameLoadDelegate {
     @IBOutlet weak var webView: WebView!
     
-    var delegate: LoginProtocol?
+    var delegate: LoginDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
