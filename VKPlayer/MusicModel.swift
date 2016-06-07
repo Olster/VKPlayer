@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import GameplayKit
 
 protocol MusicModelDelegate {
     func loadMusicInfoFailed(error: NSError)
@@ -177,5 +178,14 @@ class MusicModel {
                 downloadTask.resume()
             }
         }
+    }
+    
+    func shuffle() {
+        audiosLock.lock()
+        
+        let shuffled = GKRandomSource.sharedRandom().arrayByShufflingObjectsInArray(audios) as! [Audio]
+        audios = shuffled
+        
+        audiosLock.unlock()
     }
 }

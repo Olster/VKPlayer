@@ -10,8 +10,8 @@ import Cocoa
 import AVFoundation
 
 class PlayerViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, LoginDelegate, MusicModelDelegate {
-    let player = AVPlayer()
-    var musicModel: MusicModel!
+    private let player = AVPlayer()
+    private var musicModel: MusicModel!
     
     @IBOutlet weak var loadingIndicator: NSProgressIndicator!
     @IBOutlet weak var artistLabel: NSTextField!
@@ -38,6 +38,10 @@ class PlayerViewController: NSViewController, NSTableViewDelegate, NSTableViewDa
     }
     
     @IBAction func onRewind(sender: NSButton) {
+        if songTable.selectedRow - 1 > 0 {
+            let index = NSIndexSet(index: songTable.selectedRow - 1)
+            songTable.selectRowIndexes(index, byExtendingSelection: false)
+        }
     }
     
     @IBAction func onPlay(sender: NSButton) {
@@ -49,9 +53,17 @@ class PlayerViewController: NSViewController, NSTableViewDelegate, NSTableViewDa
     }
     
     @IBAction func onForward(sender: NSButton) {
+        if songTable.selectedRow + 1 < musicModel?.songCount ?? 0 {
+            let index = NSIndexSet(index: songTable.selectedRow + 1)
+            songTable.selectRowIndexes(index, byExtendingSelection: false)
+        }
     }
     
     @IBAction func onShuffle(sender: NSButton) {
+        if musicModel != nil {
+            musicModel.shuffle()
+            songTable.reloadData()
+        }
     }
     
     @IBAction func onReplay(sender: NSButton) {
@@ -82,7 +94,6 @@ class PlayerViewController: NSViewController, NSTableViewDelegate, NSTableViewDa
         // Don't care about removing selection.
         if songTable.numberOfSelectedRows > 0 {
             loadingIndicator.startAnimation(self)
-            
             musicModel.providePlayableAt(songTable.selectedRow, handler: play)
         }
     }
