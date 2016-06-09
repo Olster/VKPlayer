@@ -41,8 +41,12 @@ class SongCellView: NSTableCellView {
     
     private func updateDuration() {
         if durationField != nil {
-            let hours = duration/60/60
-            let mins = duration/60
+            var mins = duration/60
+            let hours = mins/60
+            if hours != 0 {
+                mins = mins % 60
+            }
+            
             let secs = duration % 60
             
             let value = hours != 0 ? "\(hours):\(mins):\(secs)" : "\(mins):\(secs)"            

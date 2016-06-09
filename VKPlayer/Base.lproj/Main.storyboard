@@ -794,7 +794,7 @@
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eK2-6X-6fw">
                                         <rect key="frame" x="18" y="118" width="304" height="22"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Artist" id="z89-ss-AZT">
-                                            <font key="font" metaFont="system" size="18"/>
+                                            <font key="font" metaFont="systemThin" size="18"/>
                                             <color key="textColor" name="controlLightHighlightColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
@@ -802,7 +802,7 @@
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9Gz-ye-mCD">
                                         <rect key="frame" x="18" y="93" width="304" height="17"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Title" id="fDc-6l-ddm">
-                                            <font key="font" metaFont="system"/>
+                                            <font key="font" metaFont="systemThin" size="13"/>
                                             <color key="textColor" name="controlLightHighlightColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
