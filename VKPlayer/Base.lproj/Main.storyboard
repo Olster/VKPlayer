@@ -705,17 +705,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="340" height="680"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cA0-3b-qSr">
+                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cA0-3b-qSr">
                                 <rect key="frame" x="0.0" y="0.0" width="340" height="680"/>
                                 <clipView key="contentView" copiesOnScroll="NO" id="VeG-Cl-v0m">
-                                    <rect key="frame" x="1" y="1" width="338" height="678"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="340" height="680"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowSizeStyle="automatic" viewBased="YES" id="UzC-m1-vRi">
-                                            <rect key="frame" x="0.0" y="0.0" width="338" height="519"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="340" height="520"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
-                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" red="0.15686274509803921" green="0.16862745098039217" blue="0.18431372549019609" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
                                                 <tableColumn editable="NO" width="320" minWidth="320" maxWidth="1000" id="ibe-Ic-cyF">
@@ -736,10 +736,10 @@
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="doV-Pn-Kma">
-                                                                    <rect key="frame" x="1" y="0.0" width="277" height="17"/>
+                                                                    <rect key="frame" x="6" y="0.0" width="272" height="17"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Artist" id="Vq1-T8-Vmn">
-                                                                        <font key="font" metaFont="system"/>
-                                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                        <font key="font" metaFont="systemThin" size="13"/>
+                                                                        <color key="textColor" name="controlLightHighlightColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                 </textField>
@@ -749,15 +749,15 @@
                                                                         <constraint firstAttribute="width" constant="33" id="pt5-cl-Ia7"/>
                                                                     </constraints>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Duration" id="qY0-ov-rdk">
-                                                                        <font key="font" metaFont="system"/>
-                                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                        <font key="font" metaFont="systemThin" size="13"/>
+                                                                        <color key="textColor" name="controlLightHighlightColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                 </textField>
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="RsV-6K-aPO" firstAttribute="centerY" secondItem="01D-4X-N4V" secondAttribute="centerY" id="2O0-Y6-18q"/>
-                                                                <constraint firstItem="doV-Pn-Kma" firstAttribute="leading" secondItem="01D-4X-N4V" secondAttribute="leading" constant="3" id="CMP-oW-wn7"/>
+                                                                <constraint firstItem="doV-Pn-Kma" firstAttribute="leading" secondItem="01D-4X-N4V" secondAttribute="leading" constant="8" id="CMP-oW-wn7"/>
                                                                 <constraint firstItem="RsV-6K-aPO" firstAttribute="leading" secondItem="doV-Pn-Kma" secondAttribute="trailing" constant="8" id="XJN-vi-NSM"/>
                                                                 <constraint firstAttribute="trailing" secondItem="RsV-6K-aPO" secondAttribute="trailing" constant="3" id="anx-iW-Qey"/>
                                                                 <constraint firstItem="doV-Pn-Kma" firstAttribute="centerY" secondItem="01D-4X-N4V" secondAttribute="centerY" id="nxt-DT-J3D"/>
@@ -883,7 +883,10 @@
                                     </button>
                                     <slider toolTip="Volume" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AJs-ag-DdV" userLabel="Volume">
                                         <rect key="frame" x="194" y="26" width="128" height="21"/>
-                                        <sliderCell key="cell" state="on" alignment="left" maxValue="1" doubleValue="0.75" tickMarkPosition="above" sliderType="linear" id="h2w-vD-zgJ" customClass="KnoblessSliderCell" customModule="VKPlayer" customModuleProvider="target"/>
+                                        <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="1" doubleValue="0.75" tickMarkPosition="above" sliderType="linear" id="h2w-vD-zgJ" customClass="KnoblessSliderCell" customModule="VKPlayer" customModuleProvider="target"/>
+                                        <connections>
+                                            <action selector="volumeValueChanged:" target="HCH-Cy-uCX" id="7xP-4P-cyF"/>
+                                        </connections>
                                     </slider>
                                     <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="5uI-tE-PoL">
                                         <rect key="frame" x="304" y="124" width="16" height="16"/>

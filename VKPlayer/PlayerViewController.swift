@@ -23,6 +23,7 @@ class PlayerViewController: NSViewController, NSTableViewDelegate, NSTableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         loadingIndicator.startAnimation(self)
+        volumeSlider.floatValue = player.volume
     }
     
     override func viewDidAppear() {
@@ -67,6 +68,10 @@ class PlayerViewController: NSViewController, NSTableViewDelegate, NSTableViewDa
     }
     
     @IBAction func onReplay(sender: NSButton) {
+    }
+    
+    @IBAction func volumeValueChanged(sender: NSSlider) {
+        player.volume = sender.floatValue
     }
     
     // MARK: - Song list setup.
