@@ -61,6 +61,10 @@ class PlayerViewController: NSViewController, NSTableViewDelegate, NSTableViewDa
     }
     
     @IBAction func onForward(sender: NSButton) {
+        onForward()
+    }
+    
+    private func onForward() {
         if songTable.selectedRow + 1 < musicModel?.songCount ?? 0 {
             let index = NSIndexSet(index: songTable.selectedRow + 1)
             songTable.selectRowIndexes(index, byExtendingSelection: false)
@@ -138,10 +142,17 @@ class PlayerViewController: NSViewController, NSTableViewDelegate, NSTableViewDa
         titleLabel.stringValue = audio!.title
         
         let playerItem = AVPlayerItem(asset: asset)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(itemEndReached), name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
+        
         player.pause()
         player.rate = 0
         player.replaceCurrentItemWithPlayerItem(playerItem)
         player.play()
+    }
+    
+    @objc private func itemEndReached() {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
+        onForward()
     }
     
     private func updatePlayerProgress(time: CMTime) {
