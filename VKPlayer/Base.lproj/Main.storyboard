@@ -810,6 +810,9 @@
                                     <slider toolTip="Song progress" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6cO-KS-fkC" userLabel="Song progress">
                                         <rect key="frame" x="18" y="66" width="304" height="21"/>
                                         <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="20" tickMarkPosition="above" sliderType="linear" id="CkV-d8-FKB" customClass="KnoblessSliderCell" customModule="VKPlayer" customModuleProvider="target"/>
+                                        <connections>
+                                            <action selector="songProgressChanged:" target="HCH-Cy-uCX" id="HIX-gY-jot"/>
+                                        </connections>
                                     </slider>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="C2s-FT-i05">
                                         <rect key="frame" x="14" y="17" width="36" height="35"/>

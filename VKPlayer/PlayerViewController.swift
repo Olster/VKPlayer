@@ -12,6 +12,7 @@ import AVFoundation
 class PlayerViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, LoginDelegate, MusicModelDelegate {
     private let player = AVPlayer()
     private var musicModel: MusicModel!
+    private var playerTimeObserver: AnyObject!
     
     @IBOutlet weak var loadingIndicator: NSProgressIndicator!
     @IBOutlet weak var artistLabel: NSTextField!
@@ -24,10 +25,16 @@ class PlayerViewController: NSViewController, NSTableViewDelegate, NSTableViewDa
         super.viewDidLoad()
         loadingIndicator.startAnimation(self)
         volumeSlider.floatValue = player.volume
+        
+        playerTimeObserver = player.addPeriodicTimeObserverForInterval(CMTimeMakeWithSeconds(1, 1), queue: nil, usingBlock: updatePlayerProgress)
     }
     
     override func viewDidAppear() {
         performSegueWithIdentifier("loginSegue", sender: self)
+    }
+    
+    override func viewWillDisappear() {
+        player.removeTimeObserver(playerTimeObserver)
     }
     
     override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
@@ -72,6 +79,16 @@ class PlayerViewController: NSViewController, NSTableViewDelegate, NSTableViewDa
     
     @IBAction func volumeValueChanged(sender: NSSlider) {
         player.volume = sender.floatValue
+    }
+    
+    @IBAction func songProgressChanged(sender: NSSlider) {
+        print("Progress Changed!")
+        if player.currentItem != nil {
+            let songPos = songProgress.doubleValue * CMTimeGetSeconds(player.currentItem!.duration)/100
+            print("Seeking \(songPos)")
+            
+            player.currentItem!.seekToTime(CMTimeMakeWithSeconds(songPos, 600))
+        }
     }
     
     // MARK: - Song list setup.
@@ -125,6 +142,14 @@ class PlayerViewController: NSViewController, NSTableViewDelegate, NSTableViewDa
         player.rate = 0
         player.replaceCurrentItemWithPlayerItem(playerItem)
         player.play()
+    }
+    
+    private func updatePlayerProgress(time: CMTime) {
+        //NSLog("TICK")
+        let duration = CMTimeGetSeconds(player.currentItem!.duration)
+        let time = CMTimeGetSeconds(player.currentTime())
+        
+        songProgress.doubleValue = (time/duration)*100
     }
     
     // MARK: - LoginDelegate implementation
