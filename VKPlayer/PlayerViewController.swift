@@ -21,12 +21,26 @@ class PlayerViewController: NSViewController, NSTableViewDelegate, NSTableViewDa
     @IBOutlet weak var volumeSlider: NSSlider!
     @IBOutlet weak var songTable: NSTableView!
     
+    private func subscribeToMediaKeys() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(onMediaKeyPlay), name: MediaKeyNotifications.MediaKeyPlayPressed, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(onMediaKeyForward), name: MediaKeyNotifications.MediaKeyForwardPressed, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(onMediaKeyRewind), name: MediaKeyNotifications.MediaKeyRewindPressed, object: nil)
+    }
+    
+    private func unsubscribeFromMediaKeys() {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: MediaKeyNotifications.MediaKeyPlayPressed, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: MediaKeyNotifications.MediaKeyForwardPressed, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: MediaKeyNotifications.MediaKeyRewindPressed, object: nil)
+    }
+    
+    // MARK: - View events.
     override func viewDidLoad() {
         super.viewDidLoad()
         loadingIndicator.startAnimation(self)
         volumeSlider.floatValue = player.volume
         
         playerTimeObserver = player.addPeriodicTimeObserverForInterval(CMTimeMakeWithSeconds(1, 1), queue: nil, usingBlock: updatePlayerProgress)
+        subscribeToMediaKeys()
     }
     
     override func viewDidAppear() {
@@ -35,6 +49,8 @@ class PlayerViewController: NSViewController, NSTableViewDelegate, NSTableViewDa
     
     override func viewWillDisappear() {
         player.removeTimeObserver(playerTimeObserver)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
+        unsubscribeFromMediaKeys()
     }
     
     override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
@@ -45,30 +61,17 @@ class PlayerViewController: NSViewController, NSTableViewDelegate, NSTableViewDa
         }
     }
     
+    // MARK: - UI handlers
     @IBAction func onRewind(sender: NSButton) {
-        if songTable.selectedRow - 1 > 0 {
-            let index = NSIndexSet(index: songTable.selectedRow - 1)
-            songTable.selectRowIndexes(index, byExtendingSelection: false)
-        }
+        onMediaKeyRewind()
     }
     
     @IBAction func onPlay(sender: NSButton) {
-        if player.rate == 0 { // Stopped.
-            player.play()
-        } else {
-            player.pause()
-        }
+        onMediaKeyPlay()
     }
     
     @IBAction func onForward(sender: NSButton) {
-        onForward()
-    }
-    
-    private func onForward() {
-        if songTable.selectedRow + 1 < musicModel?.songCount ?? 0 {
-            let index = NSIndexSet(index: songTable.selectedRow + 1)
-            songTable.selectRowIndexes(index, byExtendingSelection: false)
-        }
+        onMediaKeyForward()
     }
     
     @IBAction func onShuffle(sender: NSButton) {
@@ -92,6 +95,28 @@ class PlayerViewController: NSViewController, NSTableViewDelegate, NSTableViewDa
             print("Seeking \(songPos)")
             
             player.currentItem!.seekToTime(CMTimeMakeWithSeconds(songPos, 600))
+        }
+    }
+    
+    @objc private func onMediaKeyPlay() {
+        if player.rate == 0 { // Stopped.
+            player.play()
+        } else {
+            player.pause()
+        }
+    }
+    
+    @objc private func onMediaKeyForward() {
+        if songTable.selectedRow + 1 < musicModel?.songCount ?? 0 {
+            let index = NSIndexSet(index: songTable.selectedRow + 1)
+            songTable.selectRowIndexes(index, byExtendingSelection: false)
+        }
+    }
+    
+    @objc private func onMediaKeyRewind() {
+        if songTable.selectedRow - 1 > 0 {
+            let index = NSIndexSet(index: songTable.selectedRow - 1)
+            songTable.selectRowIndexes(index, byExtendingSelection: false)
         }
     }
     
@@ -152,7 +177,7 @@ class PlayerViewController: NSViewController, NSTableViewDelegate, NSTableViewDa
     
     @objc private func itemEndReached() {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
-        onForward()
+        onMediaKeyForward()
     }
     
     private func updatePlayerProgress(time: CMTime) {

@@ -21,12 +21,6 @@ class Audio {
     
     var image: NSImage?
     
-    var durationString: String {
-        get {
-            return "\(duration/60):\(duration % 60)"
-        }
-    }
-    
     init(id: UInt, owner_id: Int, artist: String, title: String, duration: UInt, url: NSURL, lyrics_id: UInt? = nil, album_id: UInt? = nil) {
         self.id = id
         self.owner_id = owner_id

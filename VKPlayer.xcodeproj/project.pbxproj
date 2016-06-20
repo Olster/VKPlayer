@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CCC7189A1D185D2C002AB6F4 /* MediaKeyInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC718991D185D2C002AB6F4 /* MediaKeyInterceptor.swift */; };
 		F424F1C51CE9C1E900A7FA66 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F424F1C41CE9C1E900A7FA66 /* AppDelegate.swift */; };
 		F424F1C71CE9C1E900A7FA66 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F424F1C61CE9C1E900A7FA66 /* LoginViewController.swift */; };
 		F424F1C91CE9C1E900A7FA66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F424F1C81CE9C1E900A7FA66 /* Assets.xcassets */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CCC718991D185D2C002AB6F4 /* MediaKeyInterceptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaKeyInterceptor.swift; sourceTree = "<group>"; };
 		F424F1C11CE9C1E900A7FA66 /* VKPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F424F1C41CE9C1E900A7FA66 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F424F1C61CE9C1E900A7FA66 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				F4EC44E71CF19DC50045A5E1 /* VK types */,
 				F424F1C41CE9C1E900A7FA66 /* AppDelegate.swift */,
 				F43C934B1CEC901A00CFE2DC /* PlayerViewController.swift */,
+				CCC718991D185D2C002AB6F4 /* MediaKeyInterceptor.swift */,
 				F4BD24F11D01A0DC002C0A9A /* MusicModel.swift */,
 				F424F1C61CE9C1E900A7FA66 /* LoginViewController.swift */,
 				F43C934D1CEF2ABE00CFE2DC /* MainWindowController.swift */,
@@ -176,6 +179,7 @@
 				F424F1D71CE9DBEE00A7FA66 /* AuthenticationParams.swift in Sources */,
 				F4BD24F21D01A0DC002C0A9A /* MusicModel.swift in Sources */,
 				F4EC44E61CF19A480045A5E1 /* SwiftyJSON.swift in Sources */,
+				CCC7189A1D185D2C002AB6F4 /* MediaKeyInterceptor.swift in Sources */,
 				F4BD24EE1D005949002C0A9A /* SongCellView.swift in Sources */,
 				F424F1C51CE9C1E900A7FA66 /* AppDelegate.swift in Sources */,
 				F43C934E1CEF2ABE00CFE2DC /* MainWindowController.swift in Sources */,
